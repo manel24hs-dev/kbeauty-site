@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Panier</title>
+<title>Panier</title>
 
 <style>
 body {
@@ -22,16 +22,31 @@ h1 {
     margin: 10px auto;
     max-width: 400px;
     border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
 }
 
 button {
-    background: red;
-    color: white;
-    border: none;
+    margin: 5px;
     padding: 5px;
-    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.remove { background: red; color:white; }
+.add { background: green; color:white; }
+.minus { background: orange; color:white; }
+.pay { background: #ff69b4; color:white; padding:10px; width:100%; }
+
+form {
+    background: white;
+    padding: 15px;
+    max-width: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
 }
 </style>
 
@@ -45,10 +60,19 @@ button {
 
 <h2>Total : <span id="total">0</span> €</h2>
 
-<br>
+<button onclick="clearCart()">Vider le panier</button>
+
+<!-- FORMULAIRE LIVRAISON -->
+<form onsubmit="pay(event)">
+    <h3>📦 Livraison</h3>
+    <input type="text" placeholder="Nom" required>
+    <input type="text" placeholder="Adresse" required>
+    <input type="email" placeholder="Email" required>
+    <button class="pay">💳 Payer</button>
+</form>
 
 <a href="index.html">
-    <button>Retour à la boutique</button>
+    <button>Retour boutique</button>
 </a>
 
 <script>
@@ -60,12 +84,15 @@ function displayCart() {
     cartDiv.innerHTML = "";
 
     cart.forEach((item, index) => {
-        total += item.price;
+        total += item.price * item.qty;
 
         cartDiv.innerHTML += `
             <div class="cart-item">
-                ${item.name} - ${item.price}€
-                <button onclick="removeItem(${index})">X</button>
+                ${item.name} - ${item.price}€ x ${item.qty}
+                <br>
+                <button class="add" onclick="changeQty(${index},1)">+</button>
+                <button class="minus" onclick="changeQty(${index},-1)">-</button>
+                <button class="remove" onclick="removeItem(${index})">Supprimer</button>
             </div>
         `;
     });
@@ -73,8 +100,31 @@ function displayCart() {
     document.getElementById("total").innerText = total;
 }
 
-function removeItem(index) {
-    cart.splice(index, 1);
+function changeQty(index, change){
+    cart[index].qty += change;
+    if(cart[index].qty <= 0){
+        cart.splice(index,1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+function removeItem(index){
+    cart.splice(index,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+function clearCart(){
+    cart = [];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+function pay(e){
+    e.preventDefault();
+    alert("Paiement réussi 🎉");
+    cart = [];
     localStorage.setItem("cart", JSON.stringify(cart));
     displayCart();
 }
