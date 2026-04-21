@@ -3,133 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paiement</title>
+<title>K-Beauty Glow</title>
 
 <style>
-body {
-    font-family: Arial;
-    background: #fff6f8;
-    padding: 20px;
+body { font-family: Arial; background:#fff6f8; margin:0; }
+
+header {
+    background: linear-gradient(135deg,#ffb6c1,#ff69b4);
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
-h1 {
-    text-align: center;
+.products {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+    padding:20px;
 }
 
-.cart-item {
-    background: white;
-    padding: 15px;
-    margin: 10px auto;
-    max-width: 400px;
-    border-radius: 10px;
+.card {
+    background:white;
+    width:250px;
+    border-radius:15px;
+    padding:10px;
+    text-align:center;
+}
+
+.card img {
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
 button {
-    margin: 5px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-}
-
-.add { background: green; color:white; }
-.minus { background: orange; color:white; }
-.remove { background: red; color:white; }
-.pay { background: #ff69b4; color:white; width:100%; padding:12px; font-size:16px; }
-
-form {
-    background: white;
-    padding: 15px;
-    max-width: 400px;
-    margin: 20px auto;
-    border-radius: 10px;
-}
-
-input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
+    background:#ff69b4;
+    color:white;
+    border:none;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:10px;
 }
 </style>
-
 </head>
 
 <body>
 
-<h1>🛒 Paiement</h1>
+<header>
+<h1>K-Beauty Glow ✨</h1>
+<p>Sérums coréens</p>
+</header>
 
-<div id="cart"></div>
-
-<h2>Total : <span id="total">0</span> €</h2>
-
-<button onclick="clearCart()">🗑️ Vider le panier</button>
-
-<form onsubmit="pay(event)">
-    <h3>📦 Livraison</h3>
-    <input type="text" placeholder="Nom complet" required>
-    <input type="text" placeholder="Adresse" required>
-    <input type="email" placeholder="Email" required>
-    <input type="text" placeholder="Ville" required>
-         
- <a href="https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00">
-    <button class="pay">💳 Payer maintenant</button>
+<div style="text-align:center; margin:10px;">
+<a href="panier.html">
+<button>Voir le panier 🛒</button>
 </a>
-</form>
+</div>
+
+<div class="products">
+
+<div class="card">
+<img src="IMG_1730.jpeg">
+<h3>Sérum Hydratant</h3>
+<p>20€</p>
+<button onclick="addToCart('Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
+</div>
+
+<div class="card">
+<img src="IMG_1728.jpeg">
+<h3>Sérum Glow</h3>
+<p>25€</p>
+<button onclick="addToCart('Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
+</div>
+
+</div>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function displayCart() {
-    let cartDiv = document.getElementById("cart");
-    let total = 0;
-    cartDiv.innerHTML = "";
-
-    cart.forEach((item, index) => {
-        total += item.price * item.qty;
-
-        cartDiv.innerHTML += `
-            <div class="cart-item">
-                ${item.name} - ${item.price}€ x ${item.qty}
-                <br>
-                <button class="add" onclick="changeQty(${index},1)">+</button>
-                <button class="minus" onclick="changeQty(${index},-1)">-</button>
-                <button class="remove" onclick="removeItem(${index})">Supprimer</button>
-            </div>
-        `;
-    });
-
-    document.getElementById("total").innerText = total;
-}
-
-function changeQty(index, change){
-    cart[index].qty += change;
-    if(cart[index].qty <= 0){
-        cart.splice(index,1);
-    }
+function addToCart(name, price, image){
+    cart.push({name, price, image, qty:1});
     localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
+    alert("Ajouté au panier !");
 }
-
-function removeItem(index){
-    cart.splice(index,1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-}
-
-function clearCart(){
-    cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-}
-
-function pay(e){
-    e.preventDefault();
-    alert("Commande en cour de payment 🧾 ");
-    cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
-    displayCart();
-}
-
-displayCart();
 </script>
 
 </body>
