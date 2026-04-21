@@ -1,125 +1,108 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>K-Beauty Glow</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background-color: #fff8f5;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Beauty Glow</title>
 
-        header {
-            background-color: #ffb6c1;
-            padding: 20px;
-            text-align: center;
-            color: white;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff6f8;
+}
 
-        nav {
-            background-color: #ffe4e1;
-            padding: 10px;
-            text-align: center;
-        }
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
 
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
+/* TITRE */
+header h1 {
+    margin: 0;
+}
 
-        .hero {
-            text-align: center;
-            padding: 50px;
-        }
+/* PRODUITS */
+.products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
 
-        .hero h1 {
-            color: #ff69b4;
-        }
+/* CARD PRODUIT */
+.product-card {
+    background: white;
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+}
 
-        .products {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
+/* IMAGE (IMPORTANT) */
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
 
-        .product {
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            width: 200px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
+/* BOUTON */
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    background: #ff69b4;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
 
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
+button:hover {
+    background: #ff4f9a;
+}
 
-        footer {
-            background-color: #ffb6c1;
-            text-align: center;
-            padding: 10px;
-            color: white;
-            margin-top: 20px;
-        }
-    </style>
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #ffb6c1;
+    color: white;
+    margin-top: 20px;
+}
+</style>
+
 </head>
+
 <body>
 
 <header>
     <h1>K-Beauty Glow ✨</h1>
-    <p>Crèmes coréennes pour une peau parfaite</p>
+    <p>Sérums coréens pour une peau parfaite</p>
 </header>
 
-<nav>
-    <a href="#">Accueil</a>
-    <a href="#">Produits</a>
-    <a href="#">Contact</a>
-</nav>
-
-<section class="hero">
-    <h1>Hydratation & Glow coréen 🇰🇷</h1>
-    <p>Découvrez les meilleures crèmes inspirées des rituels coréens</p>
-</section>
-
 <section class="products">
-    
+
+    <!-- PRODUIT 1 -->
     <div class="product-card">
-    <img src="IMG_1728.jpeg" alt="Crème coréenne" class="product-image">
+        <img src="IMG_1730.jpeg" alt="Sérum coréen" class="product-image">
 
-    <h2>Crème Hydratante</h2>
+        <h3>Sérum Hydratant</h3>
 
-    <p class="description">
-        Une crème coréenne hydratante qui rend la peau douce, lumineuse et confortable toute la journée.
-    </p>
+        <p>
+            Sérum coréen qui hydrate et illumine la peau.
+        </p>
 
-    <p><strong>20€</strong></p>
+        <p><strong>20€</strong></p>
 
-    <button>Acheter</button>
-</div>
+        <button>Ajouter au panier</button>
+    </div>
 
-    <div class="product">
-    
-    <img src="IMG_1730.jpeg" alt="Sérum coréen" class="product-image">
-
-    <h2>Sérum Hydratant</h2>
-
-    <p class="description">
-        Un sérum coréen hydratant qui rend la peau douce, lumineuse et confortable.
-    </p>
-
-    <p><strong>20€</strong></p>
-
-    <button>Ajouter au panier</button>
-</div>
-
-    <div class="product">
-        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=400" alt="crème coréenne">
 </section>
 
 <footer>
