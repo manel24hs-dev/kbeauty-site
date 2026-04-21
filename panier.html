@@ -61,14 +61,14 @@ button {
 
 <h2 class="total">Total : <span id="total">0</span> €</h2>
 
-<button class="pay" onclick="goStripe()">💳 Payer avec Stripe</button>
+<button class="pay" onclick="pay()">💳 Payer avec Stripe</button>
 
-<button onclick="clearCart()">Vider</button>
+<button onclick="clearCart()">Vider panier</button>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function display(){
+function show(){
     let div = document.getElementById("cart");
     let total = 0;
     div.innerHTML = "";
@@ -90,30 +90,30 @@ function display(){
     });
 
     document.getElementById("total").innerText = total;
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart",JSON.stringify(cart));
 }
 
 function qty(i,v){
     cart[i].qty += v;
     if(cart[i].qty<=0) cart.splice(i,1);
-    display();
+    show();
 }
 
 function removeItem(i){
     cart.splice(i,1);
-    display();
+    show();
 }
 
 function clearCart(){
     cart=[];
-    display();
+    show();
 }
 
-function goStripe(){
-    window.location.href="https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00";
+function pay(){
+    window.location.href = "https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00";
 }
 
-display();
+show();
 </script>
 
 </body>
