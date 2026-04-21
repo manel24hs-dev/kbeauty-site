@@ -36,9 +36,9 @@ header {
 
 }
 
-/* PANIER */
+/* PANIER BOX */
 
-.cart {
+.cart-box {
 
     position: fixed;
 
@@ -48,13 +48,25 @@ header {
 
     background: white;
 
-    padding: 10px;
+    padding: 15px;
 
     border-radius: 10px;
 
+    width: 220px;
+
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 
-    font-size: 14px;
+}
+
+.cart-item {
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+
+    display: flex;
+
+    justify-content: space-between;
 
 }
 
@@ -112,7 +124,7 @@ button {
 
     margin-top: 10px;
 
-    padding: 10px;
+    padding: 8px;
 
     border: none;
 
@@ -120,7 +132,7 @@ button {
 
     color: white;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
     cursor: pointer;
 
@@ -129,6 +141,16 @@ button {
 button:hover {
 
     background: #ff4f9a;
+
+}
+
+.remove-btn {
+
+    background: red;
+
+    font-size: 10px;
+
+    padding: 2px 5px;
 
 }
 
@@ -142,23 +164,25 @@ button:hover {
 
     <h1>K-Beauty Glow ✨</h1>
 
-    <p>Sérums coréens pour une peau parfaite</p>
+    <p>Sérums coréens</p>
 
 </header>
 
 <!-- PANIER -->
 
-<div class="cart">
+<div class="cart-box">
 
-    🛒 Panier : <span id="count">0</span> article(s)<br>
+    <strong>🛒 Panier</strong>
+
+    <div id="cart-items"></div>
+
+    <hr>
 
     Total : <span id="total">0</span> €
 
 </div>
 
 <section class="products">
-
-    <!-- PRODUIT 1 -->
 
     <div class="product-card">
 
@@ -168,11 +192,9 @@ button:hover {
 
         <p>20€</p>
 
-        <button onclick="addToCart(20)">Ajouter au panier</button>
+        <button onclick="addToCart('Sérum Hydratant', 20)">Ajouter</button>
 
     </div>
-
-    <!-- PRODUIT 2 -->
 
     <div class="product-card">
 
@@ -182,7 +204,7 @@ button:hover {
 
         <p>25€</p>
 
-        <button onclick="addToCart(25)">Ajouter au panier</button>
+        <button onclick="addToCart('Sérum Glow', 25)">Ajouter</button>
 
     </div>
 
@@ -190,21 +212,67 @@ button:hover {
 
 <script>
 
-let total = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let count = 0;
+function saveCart() {
 
-function addToCart(price) {
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    total += price;
+}
 
-    count += 1;
+function addToCart(name, price) {
+
+    cart.push({name, price});
+
+    saveCart();
+
+    displayCart();
+
+}
+
+function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+    displayCart();
+
+}
+
+function displayCart() {
+
+    let cartItems = document.getElementById("cart-items");
+
+    let total = 0;
+
+    cartItems.innerHTML = "";
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        cartItems.innerHTML += `
+
+            <div class="cart-item">
+
+                ${item.name} (${item.price}€)
+
+                <button class="remove-btn" onclick="removeItem(${index})">X</button>
+
+            </div>
+
+        `;
+
+    });
 
     document.getElementById("total").innerText = total;
 
-    document.getElementById("count").innerText = count;
-
 }
+
+// Charger le panier au démarrage
+
+displayCart();
 
 </script>
 
