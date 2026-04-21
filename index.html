@@ -16,7 +16,7 @@ body {
 
     margin: 0;
 
-    font-family: Arial, sans-serif;
+    font-family: Arial;
 
     background: #fff6f8;
 
@@ -36,37 +36,27 @@ header {
 
 }
 
-/* PANIER BOX */
+/* BOUTON PANIER */
 
-.cart-box {
+.cart-link {
 
-    position: fixed;
+    text-align: center;
 
-    right: 10px;
-
-    top: 10px;
-
-    background: white;
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    width: 220px;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin: 15px;
 
 }
 
-.cart-item {
+.cart-link button {
 
-    font-size: 13px;
+    padding: 10px;
 
-    margin-bottom: 5px;
+    background: #ff69b4;
 
-    display: flex;
+    color: white;
 
-    justify-content: space-between;
+    border: none;
+
+    border-radius: 10px;
 
 }
 
@@ -79,8 +69,6 @@ header {
     justify-content: center;
 
     gap: 20px;
-
-    padding: 20px;
 
     flex-wrap: wrap;
 
@@ -95,8 +83,6 @@ header {
     width: 250px;
 
     border-radius: 15px;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 
     padding: 15px;
 
@@ -118,39 +104,19 @@ header {
 
 }
 
-/* BOUTON */
-
 button {
 
     margin-top: 10px;
 
-    padding: 8px;
-
-    border: none;
+    padding: 10px;
 
     background: #ff69b4;
 
     color: white;
 
-    border-radius: 8px;
+    border: none;
 
-    cursor: pointer;
-
-}
-
-button:hover {
-
-    background: #ff4f9a;
-
-}
-
-.remove-btn {
-
-    background: red;
-
-    font-size: 10px;
-
-    padding: 2px 5px;
+    border-radius: 10px;
 
 }
 
@@ -168,17 +134,13 @@ button:hover {
 
 </header>
 
-<!-- PANIER -->
+<div class="cart-link">
 
-<div class="cart-box">
+    <a href="panier.html">
 
-    <strong>🛒 Panier</strong>
+        <button>Voir le panier 🛒</button>
 
-    <div id="cart-items"></div>
-
-    <hr>
-
-    Total : <span id="total">0</span> €
+    </a>
 
 </div>
 
@@ -214,65 +176,15 @@ button:hover {
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function saveCart() {
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-}
-
 function addToCart(name, price) {
 
     cart.push({name, price});
 
-    saveCart();
+    localStorage.setItem("cart", JSON.stringify(cart));
 
-    displayCart();
-
-}
-
-function removeItem(index) {
-
-    cart.splice(index, 1);
-
-    saveCart();
-
-    displayCart();
+    alert("Produit ajouté au panier !");
 
 }
-
-function displayCart() {
-
-    let cartItems = document.getElementById("cart-items");
-
-    let total = 0;
-
-    cartItems.innerHTML = "";
-
-    cart.forEach((item, index) => {
-
-        total += item.price;
-
-        cartItems.innerHTML += `
-
-            <div class="cart-item">
-
-                ${item.name} (${item.price}€)
-
-                <button class="remove-btn" onclick="removeItem(${index})">X</button>
-
-            </div>
-
-        `;
-
-    });
-
-    document.getElementById("total").innerText = total;
-
-}
-
-// Charger le panier au démarrage
-
-displayCart();
 
 </script>
 
