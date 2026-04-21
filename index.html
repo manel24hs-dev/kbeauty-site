@@ -6,7 +6,7 @@
 <title>K-Beauty Glow</title>
 
 <style>
-body { font-family: Arial; background:#fff6f8; margin:0; }
+body { font-family: Arial; margin:0; background:#fff6f8; }
 
 header {
     background: linear-gradient(135deg,#ffb6c1,#ff69b4);
@@ -45,7 +45,11 @@ button {
     padding:10px;
     border-radius:10px;
     cursor:pointer;
-    margin-top:10px;
+}
+
+.cart-btn {
+    text-align:center;
+    margin:10px;
 }
 </style>
 </head>
@@ -57,10 +61,8 @@ button {
 <p>Sérums coréens</p>
 </header>
 
-<div style="text-align:center; margin:10px;">
-<a href="panier.html">
-<button>Voir le panier 🛒</button>
-</a>
+<div class="cart-btn">
+<a href="panier.html"><button>Voir le panier 🛒</button></a>
 </div>
 
 <div class="products">
@@ -69,14 +71,14 @@ button {
 <img src="IMG_1730.jpeg">
 <h3>Sérum Hydratant</h3>
 <p>20€</p>
-<button onclick="addToCart('Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
+<button onclick="add('Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
 </div>
 
 <div class="card">
 <img src="IMG_1728.jpeg">
 <h3>Sérum Glow</h3>
 <p>25€</p>
-<button onclick="addToCart('Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
+<button onclick="add('Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
 </div>
 
 </div>
@@ -84,10 +86,10 @@ button {
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price, image){
-    cart.push({name, price, image, qty:1});
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert("Ajouté au panier !");
+function add(name,price,image){
+    cart.push({name,price,image,qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté !");
 }
 </script>
 
