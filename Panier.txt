@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Panier</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #fff6f8;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.cart-item {
+    background: white;
+    padding: 15px;
+    margin: 10px auto;
+    max-width: 400px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🛒 Mon Panier</h1>
+
+<div id="cart"></div>
+
+<h2>Total : <span id="total">0</span> €</h2>
+
+<br>
+
+<a href="index.html">
+    <button>Retour à la boutique</button>
+</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function displayCart() {
+    let cartDiv = document.getElementById("cart");
+    let total = 0;
+    cartDiv.innerHTML = "";
+
+    cart.forEach((item, index) => {
+        total += item.price;
+
+        cartDiv.innerHTML += `
+            <div class="cart-item">
+                ${item.name} - ${item.price}€
+                <button onclick="removeItem(${index})">X</button>
+            </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = total;
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    displayCart();
+}
+
+displayCart();
+</script>
+
+</body>
+</html>
