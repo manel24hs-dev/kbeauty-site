@@ -6,66 +6,132 @@
 <title>MultiGlow Beauty</title>
 
 <style>
+/* BASE */
 body {
     margin:0;
     font-family: Arial;
-    background: linear-gradient(135deg,#ffe4f0,#fff6f8);
+    background: linear-gradient(135deg,#fff0f5,#fff);
+    overflow-x:hidden;
 }
 
-/* HEADER + LOGO */
+/* HEADER */
 header {
-    text-align:center;
-    padding:20px;
-    background: rgba(255,105,180,0.2);
-    backdrop-filter: blur(5px);
+    position: sticky;
+    top:0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(10px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 20px;
+    z-index:1000;
 }
 
 .logo {
-    font-size:28px;
+    font-size:20px;
     font-weight:bold;
     color:#ff3d8b;
+}
+
+/* MENU */
+.menu {
+    display:flex;
+    gap:15px;
+}
+
+.menu a {
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.menu a:hover {
+    color:#ff3d8b;
+}
+
+/* HERO */
+.hero {
+    text-align:center;
+    padding:50px 20px;
+    animation: fadeIn 1s ease;
+}
+
+.hero h1 {
+    font-size:32px;
 }
 
 /* PRODUITS */
 .container {
     display:flex;
-    justify-content:space-around;
     flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
     padding:20px;
 }
 
-.product {
+/* CARD PREMIUM */
+.card {
+    width:260px;
     background:white;
-    width:250px;
-    border-radius:15px;
+    border-radius:20px;
     overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    margin:10px;
-    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    transform: translateY(0);
+    transition:0.3s;
+    animation: fadeUp 0.8s ease;
 }
 
-.product img {
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
     width:100%;
-    height:200px;
+    height:220px;
     object-fit:cover;
+    transition:0.3s;
 }
 
-.product h3 {
-    text-align:center;
+.card img:hover {
+    transform: scale(1.1);
 }
 
-.product p {
-    text-align:center;
-    color:gray;
-}
-
+/* BUTTON */
 button {
     width:100%;
     padding:10px;
     border:none;
-    background:#ff69b4;
+    background: linear-gradient(135deg,#ff69b4,#ff3d8b);
     color:white;
     cursor:pointer;
+    font-weight:bold;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+
+@keyframes fadeUp {
+    from {transform:translateY(30px); opacity:0;}
+    to {transform:translateY(0); opacity:1;}
+}
+
+/* FILTER MENU */
+.filter {
+    text-align:center;
+    margin:20px;
+}
+
+.filter button {
+    width:auto;
+    margin:5px;
+    padding:8px 15px;
+    border-radius:20px;
+    background:#eee;
+    color:#333;
 }
 </style>
 </head>
@@ -73,27 +139,39 @@ button {
 <body>
 
 <header>
-<div class="logo">🌸 MultiGlow K-Beauty</div>
-<p>Soins coréens glow & hydratation</p>
-<a href="panier.html"><button>Voir le panier 🛒</button></a>
+<div class="logo">🌸 MultiGlow</div>
+
+<div class="menu">
+<a href="#">Accueil</a>
+<a href="panier.html">Panier 🛒</a>
+</div>
 </header>
+
+<div class="hero">
+<h1>Skincare Coréenne Premium ✨</h1>
+<p>Glow, hydratation et peau parfaite</p>
+</div>
+
+<div class="filter">
+<button onclick="filter('all')">Tous</button>
+<button onclick="filter('serum')">Sérums</button>
+<button onclick="filter('glow')">Glow</button>
+</div>
 
 <div class="container">
 
-<!-- PRODUIT 1 -->
-<div class="product" onclick="openProduct('serum1.html')">
+<div class="card serum glow">
 <img src="IMG_1730.jpeg">
 <h3>Sérum Hydratant</h3>
 <p>20€</p>
-<button onclick="add(event,'Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
+<button onclick="add('Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
 </div>
 
-<!-- PRODUIT 2 -->
-<div class="product" onclick="openProduct('serum2.html')">
+<div class="card glow">
 <img src="IMG_1728.jpeg">
 <h3>Sérum Glow</h3>
 <p>25€</p>
-<button onclick="add(event,'Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
+<button onclick="add('Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
 </div>
 
 </div>
@@ -101,15 +179,27 @@ button {
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function add(e,name,price,image){
-    e.stopPropagation();
+function add(name,price,image){
     cart.push({name,price,image,qty:1});
     localStorage.setItem("cart",JSON.stringify(cart));
     alert("Ajouté !");
 }
 
-function openProduct(page){
-    window.location.href = page;
+/* FILTRES */
+function filter(type){
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(c=>{
+        if(type==="all"){
+            c.style.display="block";
+        } else {
+            if(c.classList.contains(type)){
+                c.style.display="block";
+            } else {
+                c.style.display="none";
+            }
+        }
+    });
 }
 </script>
 
