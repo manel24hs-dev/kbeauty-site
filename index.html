@@ -3,118 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MultiGlow Beauty</title>
+<title>PetShop Pro</title>
 
 <style>
-body{
-    margin:0;
-    font-family:Arial;
-    background:#fff0f5;
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f5f7fa;
 }
 
-header{
-    text-align:center;
-    padding:20px;
-    background:#ffb6c1;
+header {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    text-align: center;
+    padding: 25px;
 }
 
-.container{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
-    padding:20px;
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }
 
-.card{
-    width:250px;
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+.product {
+    background: white;
+    width: 260px;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.card img{
-    width:100%;
-    height:200px;
-    object-fit:cover;
+/* 🔥 IMAGES PARFAITES */
+.product img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
 }
 
-.card h3,p{
-    text-align:center;
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #00b894;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-button{
-    width:100%;
-    padding:10px;
-    border:none;
-    background:#ff69b4;
-    color:white;
+button:hover {
+    background: #019875;
+}
+
+.cart-btn {
+    margin: 15px;
+    text-align: center;
+}
+
+.cart-btn button {
+    background: #0984e3;
+}
+
+.product:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h1>🌸 MultiGlow Beauty</h1>
-
-<a href="panier.html">
-<button>Voir le panier 🛒</button>
-</a>
+    <h1>🐶 PetShop Pro</h1>
+    <p>Les indispensables pour ton animal</p>
 </header>
 
-<div class="container">
-
-<!-- 1 -->
-<div class="card">
-<img src="IMG_1730.jpeg">
-<h3>Hydra Glow Toner</h3>
-<p>Hydratation éclat</p>
-<button onclick="add('Hydra Glow Toner',18,'hydra-glow-toner.jpeg')">Ajouter</button>
+<div class="cart-btn">
+    <a href="panier.html">
+        <button>🛒 Voir le panier</button>
+    </a>
 </div>
 
-<!-- 2 -->
-<div class="card">
-<img src="peptide-cream.jpeg">
-<h3>Peptide Cream</h3>
-<p>Crème réparatrice</p>
-<button onclick="add('Peptide Cream',32,'peptide-cream.jpeg')">Ajouter</button>
-</div>
+<section class="products">
 
-<!-- 3 -->
-<div class="card">
-<img src="matte-sun-stick.jpeg">
-<h3>Matte Sun Stick</h3>
-<p>SPF protection</p>
-<button onclick="add('Matte Sun Stick',30,'matte-sun-stick.jpeg')">Ajouter</button>
-</div>
+    <!-- PRODUIT 1 -->
+    <div class="product">
+        <img src="IMG_1730.jpeg">
+        <h3>Coupe-ongles LED</h3>
+        <p>Coupe sans risque grâce à la lumière LED</p>
+        <p><strong>9.99€</strong></p>
+        <button onclick="addToCart('Coupe-ongles LED', 9.99)">Ajouter</button>
+    </div>
 
-<!-- 4 -->
-<div class="card">
-<img src="dynasty-cream.jpeg">
-<h3>Dynasty Cream</h3>
-<p>Contour des yeux</p>
-<button onclick="add('Dynasty Cream',22,'dynasty-cream.jpeg')">Ajouter</button>
-</div>
+    <!-- PRODUIT 2 -->
+    <div class="product">
+        <img src="IMG_1728.jpeg">
+        <h3>Ceinture sécurité chien</h3>
+        <p>Protège ton chien en voiture</p>
+        <p><strong>7.99€</strong></p>
+        <button onclick="addToCart('Ceinture chien', 7.99)">Ajouter</button>
+    </div>
 
-<!-- 5 -->
-<div class="card">
-<img src="revive-eye-serum.jpeg">
-<h3>Revive Eye Serum</h3>
-<p>Ginseng + Rétinol</p>
-<button onclick="add('Revive Eye Serum',28,'revive-eye-serum.jpeg')">Ajouter</button>
-</div>
+    <!-- PRODUIT 3 -->
+    <div class="product">
+        <img src="IMG_1731.jpeg">
+        <h3>Ramasse-crottes</h3>
+        <p>Facile, rapide et hygiénique</p>
+        <p><strong>12.99€</strong></p>
+        <button onclick="addToCart('Ramasse crottes', 12.99)">Ajouter</button>
+    </div>
 
-</div>
+</section>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function add(name,price,image){
-    cart.push({name,price,image,qty:1});
-    localStorage.setItem("cart",JSON.stringify(cart));
-    alert("Ajouté au panier !");
+function addToCart(name, price) {
+    let found = cart.find(p => p.name === name);
+
+    if(found){
+        found.qty++;
+    } else {
+        cart.push({name, price, qty:1});
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("Ajouté au panier 🐶");
 }
 </script>
 
