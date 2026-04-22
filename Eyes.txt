@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Revive Eye Serum</title>
+</head>
+
+<body>
+
+<h1>Revive Eye Serum ✨</h1>
+
+<img src="IMG_1728.jpeg" width="300">
+
+<p>
+Sérum contour des yeux au ginseng et rétinol.  
+Il aide à revitaliser la peau, lisser les rides fines et améliorer l’élasticité du contour des yeux.
+</p>
+
+<h2>28€</h2>
+
+<button onclick="add()">Ajouter au panier</button>
+
+<a href="index.html">Retour</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function add(){
+    cart.push({name:"Revive Eye Serum",price:28,image:"IMG_1728.jpeg",qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté !");
+}
+</script>
+
+</body>
+</html>
