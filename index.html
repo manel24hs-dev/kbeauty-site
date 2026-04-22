@@ -3,53 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-Beauty Glow</title>
+<title>MultiGlow Beauty</title>
 
 <style>
-body { font-family: Arial; margin:0; background:#fff6f8; }
+body {
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(135deg,#ffe4f0,#fff6f8);
+}
 
+/* HEADER + LOGO */
 header {
-    background: linear-gradient(135deg,#ffb6c1,#ff69b4);
-    color:white;
     text-align:center;
     padding:20px;
+    background: rgba(255,105,180,0.2);
+    backdrop-filter: blur(5px);
 }
 
-.products {
+.logo {
+    font-size:28px;
+    font-weight:bold;
+    color:#ff3d8b;
+}
+
+/* PRODUITS */
+.container {
     display:flex;
+    justify-content:space-around;
     flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
     padding:20px;
 }
 
-.card {
+.product {
     background:white;
     width:250px;
     border-radius:15px;
-    padding:10px;
-    text-align:center;
-}
-
-.card img {
-    width:100%;
-    height:200px;
-    object-fit:cover;
-    border-radius:10px;
-}
-
-button {
-    background:#ff69b4;
-    color:white;
-    border:none;
-    padding:10px;
-    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    margin:10px;
     cursor:pointer;
 }
 
-.cart-btn {
+.product img {
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.product h3 {
     text-align:center;
-    margin:10px;
+}
+
+.product p {
+    text-align:center;
+    color:gray;
+}
+
+button {
+    width:100%;
+    padding:10px;
+    border:none;
+    background:#ff69b4;
+    color:white;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -57,28 +73,27 @@ button {
 <body>
 
 <header>
-<h1>K-Beauty Glow ✨</h1>
-<p>Sérums coréens</p>
+<div class="logo">🌸 MultiGlow K-Beauty</div>
+<p>Soins coréens glow & hydratation</p>
+<a href="panier.html"><button>Voir le panier 🛒</button></a>
 </header>
 
-<div class="cart-btn">
-<a href="panier.html"><button>Voir le panier 🛒</button></a>
-</div>
+<div class="container">
 
-<div class="products">
-
-<div class="card">
+<!-- PRODUIT 1 -->
+<div class="product" onclick="openProduct('serum1.html')">
 <img src="IMG_1730.jpeg">
 <h3>Sérum Hydratant</h3>
 <p>20€</p>
-<button onclick="add('Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
+<button onclick="add(event,'Sérum Hydratant',20,'IMG_1730.jpeg')">Ajouter</button>
 </div>
 
-<div class="card">
+<!-- PRODUIT 2 -->
+<div class="product" onclick="openProduct('serum2.html')">
 <img src="IMG_1728.jpeg">
 <h3>Sérum Glow</h3>
 <p>25€</p>
-<button onclick="add('Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
+<button onclick="add(event,'Sérum Glow',25,'IMG_1728.jpeg')">Ajouter</button>
 </div>
 
 </div>
@@ -86,10 +101,15 @@ button {
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function add(name,price,image){
+function add(e,name,price,image){
+    e.stopPropagation();
     cart.push({name,price,image,qty:1});
     localStorage.setItem("cart",JSON.stringify(cart));
     alert("Ajouté !");
+}
+
+function openProduct(page){
+    window.location.href = page;
 }
 </script>
 
