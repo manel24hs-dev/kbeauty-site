@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Sérum Glow</title>
+
+<style>
+body { font-family: Arial; background:#fff6f8; text-align:center; padding:20px; }
+img { width:300px; border-radius:15px; }
+button {
+    padding:10px;
+    background:#ff69b4;
+    color:white;
+    border:none;
+    border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Sérum Glow ✨</h1>
+
+<img src="IMG_1728.jpeg">
+
+<p>
+Sérum éclat pour peau lumineuse style K-Beauty.
+Effet glow immédiat 💖
+</p>
+
+<h2>25€</h2>
+
+<button onclick="add()">Ajouter au panier</button>
+
+<a href="index.html">Retour</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function add(){
+    cart.push({name:"Sérum Glow",price:25,image:"IMG_1728.jpeg",qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté !");
+}
+</script>
+
+</body>
+</html>
