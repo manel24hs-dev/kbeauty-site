@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dynasty Cream</title>
+</head>
+
+<body>
+
+<h1>Dynasty Cream 🌙</h1>
+
+<img src="IMG_1730.jpeg" width="300">
+
+<p>
+Crème contour des yeux à appliquer le soir avant de dormir.  
+Elle hydrate intensément et aide à réduire les signes de fatigue pour un regard reposé et lumineux.
+</p>
+
+<h2>22€</h2>
+
+<button onclick="add()">Ajouter au panier</button>
+
+<a href="index.html">Retour</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function add(){
+    cart.push({name:"Dynasty Cream",price:22,image:"IMG_1730.jpeg",qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté !");
+}
+</script>
+
+</body>
+</html>
