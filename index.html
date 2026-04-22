@@ -18,19 +18,12 @@ header{
     background:#ffb6c1;
 }
 
-.section-title{
-    text-align:center;
-    font-size:18px;
-    margin-top:20px;
-    font-weight:bold;
-}
-
 .container{
     display:flex;
-    flex-wrap:wrap;
     justify-content:center;
     gap:20px;
     padding:20px;
+    flex-wrap:wrap;
 }
 
 .card{
@@ -38,8 +31,6 @@ header{
     background:white;
     border-radius:15px;
     overflow:hidden;
-    cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card img{
@@ -55,9 +46,10 @@ header{
 button{
     width:100%;
     padding:10px;
+    border:none;
     background:#ff69b4;
     color:white;
-    border:none;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -72,56 +64,33 @@ button{
 </a>
 </header>
 
-<div class="section-title">🟣 Produits essentiels</div>
-
 <div class="container">
 
-<!-- ancien produit 1 -->
-<div class="card" onclick="openPage('eye1.html')">
+<!-- PRODUIT 1 -->
+<div class="card">
 <img src="IMG_1730.jpeg">
-<h3>Dynastic Eye Cream</h3>
-<p>Contour des yeux</p>
+<h3>Produit 1</h3>
+<p>Sérum soin visage</p>
+<button onclick="add('Produit 1',25,'IMG_1730.jpeg')">Ajouter</button>
 </div>
 
-<!-- ancien produit 2 -->
-<div class="card" onclick="openPage('eye2.html')">
+<!-- PRODUIT 2 -->
+<div class="card">
 <img src="IMG_1728.jpeg">
-<h3>Resivive Eye Serum</h3>
-<p>Ginseng + Rétinol</p>
-</div>
-
-</div>
-
-<div class="section-title">✨ Nouvelle gamme</div>
-
-<div class="container">
-
-<!-- nouveau 1 -->
-<div class="card" onclick="openPage('sun.html')">
-<img src="IMG_1731.jpeg">
-<h3>Matte Sun Stick</h3>
-<p>SPF protection</p>
-</div>
-
-<!-- nouveau 2 -->
-<div class="card" onclick="openPage('toner.html')">
-<img src="IMG_1732.jpeg">
-<h3>Hydra Glow Toner</h3>
-<p>Hydratation éclat</p>
-</div>
-
-<!-- nouveau 3 -->
-<div class="card" onclick="openPage('cream.html')">
-<img src="IMG_1733.jpeg">
-<h3>Peptide Cream</h3>
-<p>Réparation peau</p>
+<h3>Produit 2</h3>
+<p>Sérum contour yeux</p>
+<button onclick="add('Produit 2',28,'IMG_1728.jpeg')">Ajouter</button>
 </div>
 
 </div>
 
 <script>
-function openPage(page){
-    window.location.href = page;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function add(name,price,image){
+    cart.push({name,price,image,qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté au panier !");
 }
 </script>
 
