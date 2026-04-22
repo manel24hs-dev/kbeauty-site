@@ -1,0 +1,24 @@
+<h1>Matte Sun Stick 🌿</h1>
+
+<img src="IMG_1731.jpeg" width="300">
+
+<p>
+Stick solaire SPF fini mat avec mugwort et camélia.  
+Protège la peau des UV sans effet gras.
+</p>
+
+<h2>30€</h2>
+
+<button onclick="add()">Ajouter au panier</button>
+
+<a href="index.html">Retour</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function add(){
+    cart.push({name:"Matte Sun Stick",price:30,image:"IMG_1731.jpeg",qty:1});
+    localStorage.setItem("cart",JSON.stringify(cart));
+    alert("Ajouté !");
+}
+</script>
