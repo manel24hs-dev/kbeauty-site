@@ -2,15 +2,20 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Panier</title>
 
 <style>
-body { font-family:Arial; background:#fff6f8; padding:20px; }
+body{
+    font-family:Arial;
+    background:#fff6f8;
+    padding:20px;
+}
 
-h1 { text-align:center; }
+h1{
+    text-align:center;
+}
 
-.item {
+.item{
     background:white;
     padding:15px;
     margin:10px auto;
@@ -19,34 +24,33 @@ h1 { text-align:center; }
     text-align:center;
 }
 
-.item img {
+.item img{
     width:100%;
     height:150px;
     object-fit:cover;
-    border-radius:10px;
 }
 
-button {
-    margin:5px;
-    padding:8px;
+button{
+    padding:10px;
     border:none;
-    border-radius:8px;
+    margin:5px;
 }
 
-.add { background:green; color:white; }
-.minus { background:orange; color:white; }
-.remove { background:red; color:white; }
+.remove{
+    background:red;
+    color:white;
+}
 
-.pay {
+.pay{
+    width:100%;
     background:#635bff;
     color:white;
-    width:100%;
     padding:12px;
     font-size:16px;
-    margin-top:20px;
+    border:none;
 }
 
-.total {
+.total{
     text-align:center;
     font-size:20px;
 }
@@ -55,15 +59,17 @@ button {
 
 <body>
 
-<h1>🛒 Panier</h1>
+<h1>🛒 Mon Panier</h1>
 
 <div id="cart"></div>
 
 <h2 class="total">Total : <span id="total">0</span> €</h2>
 
-<button class="pay" onclick="pay()">💳 Payer avec Stripe</button>
+<button class="pay" onclick="pay()">💳 Payer</button>
 
-<button onclick="clearCart()">Vider panier</button>
+<a href="index.html">
+<button>⬅ Retour boutique</button>
+</a>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -82,9 +88,7 @@ function show(){
             <h3>${item.name}</h3>
             <p>${item.price}€ x ${item.qty}</p>
 
-            <button class="add" onclick="qty(${i},1)">+</button>
-            <button class="minus" onclick="qty(${i},-1)">-</button>
-            <button class="remove" onclick="removeItem(${i})">X</button>
+            <button class="remove" onclick="removeItem(${i})">Supprimer</button>
         </div>
         `;
     });
@@ -93,24 +97,13 @@ function show(){
     localStorage.setItem("cart",JSON.stringify(cart));
 }
 
-function qty(i,v){
-    cart[i].qty += v;
-    if(cart[i].qty<=0) cart.splice(i,1);
-    show();
-}
-
 function removeItem(i){
     cart.splice(i,1);
     show();
 }
 
-function clearCart(){
-    cart=[];
-    show();
-}
-
 function pay(){
-    window.location.href = "https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00";
+    window.location.href="https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00";
 }
 
 show();
