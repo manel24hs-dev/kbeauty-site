@@ -20,10 +20,10 @@ header{
 
 .container{
     display:flex;
+    flex-wrap:wrap;
     justify-content:center;
     gap:20px;
     padding:20px;
-    flex-wrap:wrap;
 }
 
 .card{
@@ -31,6 +31,7 @@ header{
     background:white;
     border-radius:15px;
     overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card img{
@@ -49,7 +50,6 @@ button{
     border:none;
     background:#ff69b4;
     color:white;
-    cursor:pointer;
 }
 </style>
 </head>
@@ -66,20 +66,44 @@ button{
 
 <div class="container">
 
-<!-- PRODUIT 1 -->
+<!-- 1 -->
 <div class="card">
-<img src="IMG_1730.jpeg">
-<h3>Produit 1</h3>
-<p>Sérum soin visage</p>
-<button onclick="add('Produit 1',25,'IMG_1730.jpeg')">Ajouter</button>
+<img src="hydra-glow-toner.jpeg">
+<h3>Hydra Glow Toner</h3>
+<p>Hydratation éclat</p>
+<button onclick="add('Hydra Glow Toner',18,'hydra-glow-toner.jpeg')">Ajouter</button>
 </div>
 
-<!-- PRODUIT 2 -->
+<!-- 2 -->
 <div class="card">
-<img src="IMG_1728.jpeg">
-<h3>Produit 2</h3>
-<p>Sérum contour yeux</p>
-<button onclick="add('Produit 2',28,'IMG_1728.jpeg')">Ajouter</button>
+<img src="peptide-cream.jpeg">
+<h3>Peptide Cream</h3>
+<p>Crème réparatrice</p>
+<button onclick="add('Peptide Cream',32,'peptide-cream.jpeg')">Ajouter</button>
+</div>
+
+<!-- 3 -->
+<div class="card">
+<img src="matte-sun-stick.jpeg">
+<h3>Matte Sun Stick</h3>
+<p>SPF protection</p>
+<button onclick="add('Matte Sun Stick',30,'matte-sun-stick.jpeg')">Ajouter</button>
+</div>
+
+<!-- 4 -->
+<div class="card">
+<img src="dynasty-cream.jpeg">
+<h3>Dynasty Cream</h3>
+<p>Contour des yeux</p>
+<button onclick="add('Dynasty Cream',22,'dynasty-cream.jpeg')">Ajouter</button>
+</div>
+
+<!-- 5 -->
+<div class="card">
+<img src="revive-eye-serum.jpeg">
+<h3>Revive Eye Serum</h3>
+<p>Ginseng + Rétinol</p>
+<button onclick="add('Revive Eye Serum',28,'revive-eye-serum.jpeg')">Ajouter</button>
 </div>
 
 </div>
