@@ -2,123 +2,127 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Panier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MultiGlow Beauty</title>
 
 <style>
-body {
-    font-family: Arial;
-    background:#fff6f8;
+body{
+    margin:0;
+    font-family:Arial;
+    background:#fff0f5;
+}
+
+header{
+    text-align:center;
+    padding:20px;
+    background:#ffb6c1;
+}
+
+.section-title{
+    text-align:center;
+    font-size:18px;
+    margin-top:20px;
+    font-weight:bold;
+}
+
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
     padding:20px;
 }
 
-h1 {
-    text-align:center;
-}
-
-.item {
+.card{
+    width:250px;
     background:white;
-    padding:15px;
-    margin:10px auto;
-    max-width:400px;
-    border-radius:10px;
-    text-align:center;
+    border-radius:15px;
+    overflow:hidden;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
-.item img {
+.card img{
     width:100%;
-    height:150px;
+    height:200px;
     object-fit:cover;
-    border-radius:10px;
 }
 
-button {
-    margin:5px;
-    padding:8px;
-    border:none;
-    border-radius:8px;
-}
-
-.add { background:green; color:white; }
-.minus { background:orange; color:white; }
-.remove { background:red; color:white; }
-
-.pay {
-    background:#635bff;
-    color:white;
-    width:100%;
-    padding:12px;
-    font-size:16px;
-    margin-top:20px;
-}
-
-.total {
+.card h3,p{
     text-align:center;
-    font-size:20px;
+}
+
+button{
+    width:100%;
+    padding:10px;
+    background:#ff69b4;
+    color:white;
+    border:none;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🛒 Mon Panier</h1>
+<header>
+<h1>🌸 MultiGlow Beauty</h1>
 
-<div id="cart"></div>
+<a href="panier.html">
+<button>Voir le panier 🛒</button>
+</a>
+</header>
 
-<h2 class="total">Total : <span id="total">0</span> €</h2>
+<div class="section-title">🟣 Produits essentiels</div>
 
-<button class="pay" onclick="pay()">💳 Payer maintenant</button>
+<div class="container">
 
-<button onclick="clearCart()">Vider panier</button>
+<!-- ancien produit 1 -->
+<div class="card" onclick="openPage('eye1.html')">
+<img src="IMG_1730.jpeg">
+<h3>Dynastic Eye Cream</h3>
+<p>Contour des yeux</p>
+</div>
+
+<!-- ancien produit 2 -->
+<div class="card" onclick="openPage('eye2.html')">
+<img src="IMG_1728.jpeg">
+<h3>Resivive Eye Serum</h3>
+<p>Ginseng + Rétinol</p>
+</div>
+
+</div>
+
+<div class="section-title">✨ Nouvelle gamme</div>
+
+<div class="container">
+
+<!-- nouveau 1 -->
+<div class="card" onclick="openPage('sun.html')">
+<img src="IMG_1731.jpeg">
+<h3>Matte Sun Stick</h3>
+<p>SPF protection</p>
+</div>
+
+<!-- nouveau 2 -->
+<div class="card" onclick="openPage('toner.html')">
+<img src="IMG_1732.jpeg">
+<h3>Hydra Glow Toner</h3>
+<p>Hydratation éclat</p>
+</div>
+
+<!-- nouveau 3 -->
+<div class="card" onclick="openPage('cream.html')">
+<img src="IMG_1733.jpeg">
+<h3>Peptide Cream</h3>
+<p>Réparation peau</p>
+</div>
+
+</div>
 
 <script>
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function show(){
-    let div = document.getElementById("cart");
-    let total = 0;
-    div.innerHTML = "";
-
-    cart.forEach((item,i)=>{
-        total += item.price * item.qty;
-
-        div.innerHTML += `
-        <div class="item">
-            <img src="${item.image}">
-            <h3>${item.name}</h3>
-            <p>${item.price}€ x ${item.qty}</p>
-
-            <button class="add" onclick="qty(${i},1)">+</button>
-            <button class="minus" onclick="qty(${i},-1)">-</button>
-            <button class="remove" onclick="removeItem(${i})">X</button>
-        </div>
-        `;
-    });
-
-    document.getElementById("total").innerText = total;
-    localStorage.setItem("cart",JSON.stringify(cart));
+function openPage(page){
+    window.location.href = page;
 }
-
-function qty(i,v){
-    cart[i].qty += v;
-    if(cart[i].qty<=0) cart.splice(i,1);
-    show();
-}
-
-function removeItem(i){
-    cart.splice(i,1);
-    show();
-}
-
-function clearCart(){
-    cart=[];
-    show();
-}
-
-function pay(){
-    window.location.href="https://buy.stripe.com/dRm7sK7b58ZSgq28lb0sU00";
-}
-
-show();
 </script>
 
 </body>
