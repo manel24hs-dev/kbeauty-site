@@ -1,0 +1,9 @@
+petshop/
+│
+├── public/
+│     ├── index.html   (boutique)
+│     ├── panier.html  (panier)
+│     ├── success.html
+│     ├── cancel.html
+│
+├── server.js
